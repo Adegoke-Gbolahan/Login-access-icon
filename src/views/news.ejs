@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+		<meta charset="UTF-8"/>
+		<meta name="description" content="description"/>
+		<meta name="keywords" content="keywords"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+		<link rel="shortcut icon" href="img/favicon.jpg"/>
+		<title>XLR Sound Board</title>
+		<!-- styles-->
+		<link rel="stylesheet" href="css/styles.min.css"/>
+		<!-- web-font loader-->
+		<script>
+			WebFontConfig = {
+
+				google: {
+
+					families: ['Quicksand:300,400,500,700', 'Permanent+Marker:400'],
+
+				}
+
+			}
+
+			function font() {
+
+				var wf = document.createElement('script')
+
+				wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
+				wf.type = 'text/javascript'
+				wf.async = 'true'
+
+				var s = document.getElementsByTagName('script')[0]
+
+				s.parentNode.insertBefore(wf, s)
+
+			}
+
+			font()
+		</script>
+		<style>
+			@media screen and (min-width: 600px){
+				.aside-dropdown{
+					display: none;
+				}
+			}
+			@media screen and (min-width: 600px){
+				.dropdown-trigger__item{
+					display: none;
+				}
+			}
+.footer-memu {
+	float: right
+}
+
+.footer-memu li {
+	float: left;
+	list-style-type:none;
+}
+
+.footer-memu li+li {
+	margin-left: 30px
+}
+
+.footer-memu li a {
+	text-transform: uppercase;
+	color: white;
+	font-size: 14px;
+	line-height: 30px;
+	text-decoration: none;
+}
+
+.footer-memu li a:hover {
+	color: black
+}
+.loginBtn {
+    box-sizing: border-box;
+    position: relative;
+    /* width: 13em;  - apply for fixed size */
+    margin: 0.2em;
+    padding: 0 15px 0 46px;
+    border: none;
+    text-align: left;
+    line-height: 34px;
+    white-space: nowrap;
+    border-radius: 0.2em;
+    font-size: 16px;
+    color: #FFF;
+  }
+  .loginBtn:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 100%;
+  }
+  .loginBtn:focus {
+    outline: none;
+  }
+  .loginBtn:active {
+    box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+  }
+  
+  
+  /* Facebook */
+  .loginBtn--facebook {
+    background-color: #4C69BA;
+    background-image: linear-gradient(#4C69BA, #3B55A0);
+    /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+    text-shadow: 0 -1px 0 #354C8C;
+  }
+  .loginBtn--facebook:before {
+    border-right: #364e92 1px solid;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+  }
+  .loginBtn--facebook:hover,
+  .loginBtn--facebook:focus {
+    background-color: #5B7BD5;
+    background-image: linear-gradient(#5B7BD5, #4864B1);
+  }
+  
+  
+  /* Google */
+  .loginBtn--google {
+    /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+    background: #DD4B39;
+  }
+  .loginBtn--google:before {
+    border-right: #BB3F30 1px solid;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+  }
+  .loginBtn--google:hover,
+  .loginBtn--google:focus {
+    background: #E74B37;
+  }
+
+.modal-title {
+    font-weight: 900
+}
+
+.modal-content {
+    border-radius: 13px
+}
+.fab:before {
+    position: relative;
+    top: 13px
+}
+
+.smd {
+    width: 200px;
+    font-size: small;
+    text-align: center
+}
+
+.modal-footer {
+    display: block
+}
+
+.ur {
+    border: none;
+    background-color: #e6e2e2;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px
+}
+
+.cpy {
+    border: none;
+    background-color: #e6e2e2;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer
+}
+
+button.focus,
+button:focus {
+    outline: 0;
+    box-shadow: none !important
+}
+
+.ur.focus,
+.ur:focus {
+    outline: 0;
+    box-shadow: none !important
+}
+
+.message {
+    font-size: 11px;
+    color: #ee5535
+}
+@media only screen and (min-width: 600px) {
+  .space-div{
+      position: relative;
+    vertical-align: top;
+    width: 84px;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-right: 25px;
+    margin-left: 25px;
+    word-wrap: break-word;
+}
+}
+		</style>
+		
+		<script src="js/jquery.min.js"></script>
+		<script>
+				var requestUrl = "http://ip-api.com/json";
+
+				$.ajax({
+				url: requestUrl,
+				type: 'GET',
+				success: function(json)
+				{
+					document.getElementById('countryName').innerHTML = json.country
+					// console.log("My country is: " + json.country);
+				},
+				error: function(err)
+				{
+					console.log("Request failed, error= " + err);
+				}
+				});
+				function getUrl(getMusicIid){
+					document.getElementById('myInput').value = "https://xlrsounds.com/music/" + getMusicIid;
+				}
+				function copyToClipboard(){
+				  var copyText = document.getElementById("myInput");
+                  copyText.select();
+                  copyText.setSelectionRange(0, 99999)
+                  document.execCommand("copy");	
+                  document.getElementById('copiedMsg').innerHTML = "copied"
+                 setTimeout(function(){
+                 document.getElementById('copiedMsg').innerHTML = ""
+                }, 2000);//wait 2 
+				}
+		</script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	</head>
+	<body onload="getUrl()"">
+		<div class="page-wrapper">
+			<!-- mobile menu start-->
+			<div class="mobile-nav">
+				<div class="mobile-nav__inner">
+					<div class="mobile-nav__item">
+						<nav class="menu-holder">
+							<ul class="mobile-menu">
+								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
+								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
+								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
+								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!-- mobile menu end-->
+			<!-- aside dropdown start-->
+			<div class="aside-dropdown">
+				<div class="aside-dropdown__inner"><span class="aside-dropdown__close">
+					<svg class="icon">
+						<use xlink:href="#close"></use>
+					</svg></span>
+					<div class="aside-dropdown__item d-lg-none d-block">
+						<ul class="aside-menu">
+							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="/"><span>HOME</span></a>
+							</li>
+							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="javascript:void(0);"><span>TRENDING</span></a>
+							</li>
+							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="/news?duration=new"><span>NEW</span></a>
+							</li>
+							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="javascript:void(0);"><span>CATEGORYS</span></a>
+								<ul class="aside-menu__sub-list">
+											<%  for (let i = 0; i < categories.length; i++) {  %> 
+												<li><a href="/category?category=<%= categories[i].category %>"><span><%= categories[i].category %></span></a></li>
+												<% } %>
+								</ul>
+							</li>
+							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="/favourite?favourite=1"><span>FAVORITES</span></a>
+							</li>
+							<%if(email == null){%>
+								<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" onclick="ifNotLogin()"><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>
+								</li>
+								<% }else{ %>		
+								<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="/user-upload"><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>
+								</li>
+						    <% } %>	
+							
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+			<!-- aside dropdown end-->
+			<!-- header start-->
+			<header class="header header--front">
+				<div class="container-fluid">
+					<div class="row no-gutters justify-content-between">
+						<div class="col-auto d-flex align-items-center">
+							<div class="dropdown-trigger d-none d-sm-block">
+								<div class="dropdown-trigger__item"></div>
+							</div>
+							<div class="header-logo"><a class="header-logo__link" href="/"><img class="header-logo__img" src="img/logo_mono.png" alt="logo"/></a></div>
+						</div>
+						<div class="col-auto">
+							<!-- main menu start-->
+							<nav>
+								<ul class="main-menu">
+									<li class="main-menu__item main-menu__item--has-child "><a class="main-menu__link" href="/"><span>HOME</span></a>
+									</li>
+									</li>
+									<li class="main-menu__item main-menu__item--has-child main-menu__item--active"><a class="main-menu__link" href="/news?duration=new"><span>NEW</span></a>
+									</li>
+									<li class="main-menu__item main-menu__item--has-child "><a class="main-menu__link" href="javascript:void(0);"><span>CATEGORYS</span></a>
+										<ul class="main-menu__sub-list">
+											<%  for (let i = 0; i < categories.length; i++) {  %> 
+												<li><a href="/category?category=<%= categories[i].category %>"><span><%= categories[i].category %></span></a></li>
+												<% } %>
+										</ul>
+									</li>
+									<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="/favourite?favourite=1"><span>FAVORITES</span></a>
+									</li>
+									<%if(email == null){%>
+									<li class="main-menu__item main-menu__item--has-child"><a  onclick="ifNotLogin()" class="main-menu__link"><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>
+									<% }else{ %>	
+									<li class="main-menu__item main-menu__item--has-child"><a  href="/user-upload" class="main-menu__link" ><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>	
+									</li>
+									<% } %>
+								</ul>
+							</nav>
+							<!-- main menu end-->
+						</div>
+						<div class="col-auto d-flex align-items-center">
+							<!-- REGISTER BTN start-->
+							<!-- <button type="butto	n"  class="btn btn-outline-success shadow-none" data-toggle="modal" data-target="#loginModal" style="margin-right: 40px;">Sign In</button> -->
+							<li class="lang-select__item lang-select__item--active"  style="margin-right: 40px;"><span><i style="font-size: 30px;" class="fa fa-user" aria-hidden="true"></i></span>
+								<%if(email == null){%>
+								<ul class="lang-select__sub-list" style="width:200px;">
+									<li><a style="text-decoration: none;color: black;" onMouseOver="this.style.color='black'"
+										onMouseOut="this.style.color='black'" data-toggle="modal" data-target="#loginModal" >Login</a>
+									</li>
+										<li><a style="text-decoration: none;color: black;" onMouseOver="this.style.color='black'"
+											onMouseOut="this.style.color='black'" data-toggle="modal" data-target="#registerModal" >Sign Up</a>
+										</li>
+								</ul>
+								<%}else{%>
+									<ul class="lang-select__sub-list" style="width:200px;">
+										<li><a href="/favourite?favourite=1">Favorites</a></li>
+										<li><a href="/logout">Sign Out</a></li>
+									</ul>
+								<%}%>
+							</li>
+							<!-- REGISTER BTN end-->
+							<div class="dropdown-trigger d-block d-sm-none">
+								<div class="dropdown-trigger__item"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- header end-->
+			<main class="main">
+				<!-- promo start-->
+				
+				<!-- promo end-->
+
+				<!-- section start-->
+				<section class="section">
+					<div class="container">
+						<div class="row d-flex justify-content-center text-center margin-bottom">
+							<div class="col-12">
+								<h2 class="text text-center"><%=title%>  <%if(home == "1"){%>in <span id="countryName"></span><%}%> </h2>
+								<%if(email == null){%>
+									<small style="display: none;" class="text text-danger">Please Login!!!</small>
+								<%}%>
+							</div>
+						</div>
+						<div class="row d-flex justify-content-center text-center " style="align-items: center;">
+							
+							<%if(music.length >0){
+								for( var i = 0; i<music.length; i++){	
+							%>
+							<div class="space-div">
+								<audio id="<%=music[i].music_id%>">
+									<source src="music/<%=music[i].url%>" type="audio/mpeg">
+								 </audio>
+									<button class="btn btn-outline shadow-none" id="pausePlay"   onkeypress="displayImg1()"  onclick="play('music/<%=music[i].url%>','<%=music[i].music_id%> + <%=music[i].url%>','<%=music[i].music_id%> + <%=music[i].id%>','<%=music[i].music_id%>')">
+									<img id="<%=music[i].music_id%> + <%=music[i].url%>" style="width: 70px;" src="img/btn1.png" alt="Image">
+									<img id="<%=music[i].music_id%> + <%=music[i].id%>"  style="width: 70px;display:none;" src="img/btn2.png" alt="Image">
+									<small style="display: none;" id="checkActive" >0</small>
+									</button><br>
+									<a href="/music/<%=music[i].music_id%>" style="text-decoration: none;color: black;font-size:80%" onMouseOver="this.style.color='#6b96f5'"
+									 onMouseOut="this.style.color='black'"><%=music[i].name%></a>
+									<div>
+										<i onclick="myfav('<%=music[i].music_id%>','<%=music[i].url%>','<%=music[i].id%>','<%=music[i].name%>','<%=music[i].category%>')" style="color: red;" class="fa fa-heart" aria-hidden="true"></i> &nbsp; 
+										<i onclick="sharer('<%=music[i].music_id%>','<%=music[i].name%>','<%=music[i].category%>')" class="fa fa-share-alt"  style="color: #14ed38;"  aria-hidden="true"></i>
+									</div>
+							</div>
+							<%}}else{%>
+								<h3 class="text text-center" >No sound in this category!. Please check back later</h3>
+							<%}%>
+						</div>
+					</div>
+				</section>
+			</main>
+
+				<!--share modal-->
+			<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+				<div class="modal-dialog  modal-dialog-centered" role="document">
+					<div class="modal-content col-12">
+						<div class="modal-header">
+							<h5 class="modal-title">Share</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+						</div>
+						<div class="modal-body">
+							<div class="icon-container1 d-flex" id="sharecontainer">
+								<div id="twitter"  class="smd"> <i class="fa fa-twitter fa-2x" style="color:#4c6ef5;"></i>
+									<p>Twitter</p>
+								</div>
+								<div id="facebook" class="smd"> <i class="fa fa-facebook fa-2x" style="color: #3b5998;"></i>
+									<p>Facebook</p>
+								</div>
+									<div id="whatsapp" class="smd"> <i class="fa fa-whatsapp fa-2x" style="color: #25D366;"></i>
+										<p>Whatsapp</p>
+									</div>
+								<div id="telegram" class="smd"> <i class="fa fa-telegram fa-2x" style="color: #4c6ef5;"></i>
+									<p>Telegram</p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer"> <label style="font-weight: 600">Page Link <span class="message"></span></label><br />
+							<div class="row"> <input class="col-10 ur" type="url" placeholder="https://www.sounboard.app/rick_rose_huh" id="myInput" aria-describedby="inputGroup-sizing-default" style="height: 40px;"> <button class="cpy" onclick="copyToClipboard()"><i class="fa fa-clone"></i></button> </div>
+							<p id="copiedMsg" style="color:green;"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--share modal end-->
+
+			<!-- footer start-->
+			<footer class="footer">
+				<div class="container">
+					
+					<div class="row align-items-baseline">
+						<div class="col-md-6">
+							<p class="footer-copyright">© 2021 Copyright by Xlrsounds</p>
+						</div>
+						<div class="col-md-6">
+							<div class="footer-memu">
+								<ul>
+									<li><a href="/">Home</a></li>
+									<li><a href="/news?duration=new">New</a></li>
+									<li><a onclick="showRegister()">Register</a></li>
+									<li><a href="/about">About</a></li>
+									<li><a href="/privacy-policy">Privacy policy</a></li>
+									<li><a href="/terms-of-use">Terms of use</a></li>
+									<li><a href="/dcma_copyright_policy">DCMA - Copyright</a></li>
+								 </ul>
+							</div>
+						</div>
+						<span>
+                        Made with <i class="fa fa-heart pulse"> by </i>  
+                        <a href="https://binarytechsolution.com.ng" style="text-decoration: none;  color: white;" target="_blank">Binary tech solution</a>
+                    </span>
+					</div>
+				</div>
+			</footer>
+			<!-- footer end-->
+			<div class="modal fade" id="loginModal" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+				  <div class="modal-content">
+					<div style="background-color: #14ed38;" class="modal-header">
+					  <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+					  <button type="button" class="close shadow-none" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					<div class="modal-body form-group">
+					  <form onsubmit="login(event)"  autocomplete="off">
+						  <small id="loginError" style="display: none;" class="text text-danger">Incorrect login credentials</small>
+						<div class="form-group">
+							<label for="username">Email:</label>
+							<input class="form-control shadow-none"  placeholder="Email" type="email" id="email" required>
+						</div>
+						<div class="form-group">
+							<label for="username">Password:</label>
+							<input class="form-control shadow-none" placeholder="Password" type="password" id="password" required>
+						</div>
+						<div class="text text-center">
+							<button type="submit" class="btn btn-success shadow-none">Sign In</button>
+						</div><br>
+						<div>
+							<a onclick="showRegister()" style="text-decoration: none;float: left;">Register</a>
+						</div>
+						<div>
+							<a href="#"  style="text-decoration: none;float: right;">Forgot password</a>
+						</div>
+					  </form><br>
+
+					  <h3 style="display: none;" class="text text-center" style="font-size: 20px;">OR</h3>
+
+						<div style="display: none;" class="text text-center">
+								Sign Up with your social media<br><br>
+								<button class="loginBtn loginBtn--facebook">
+								   Sign Up with Facebook
+								 </button>
+								 
+								 <button class="loginBtn loginBtn--google">
+								   Sign Up  with Google
+								 </button>
+						</div>
+					</div>
+					<!-- <div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					  <button type="button" class="btn btn-primary">Save changes</button>
+					</div> -->
+				  </div>
+				</div>
+			  </div>
+			  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+				  <div class="modal-content">
+					<div style="background-color: #14ed38;" class="modal-header">
+					  <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+					  <button type="button" class="close shadow-none" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					<div class="modal-body form-group">
+                        <div style="display: block;" id="mainReg">
+							<form onsubmit="registerNow(event)" method="POST" autocomplete="off">
+								<div class="form-group">
+									<label for="username">Email:</label>
+									<input class="form-control shadow-none"  placeholder="Email" type="email" id="remail" required>
+								</div>
+								<div class="form-group">
+									<label for="username">Password:</label>
+									<input class="form-control shadow-none" placeholder="Password" type="password" id="rpassword" required>
+									<small style="display: none;" id="notMatchError" class="text text-danger">Password does not match</small>
+								</div>
+								<div class="form-group">
+									<label for="username">Confirm Password:</label>
+								 <input class="form-control shadow-none"  placeholder="Confirm Password" type="password" id="cpassword" required>
+								</div>
+								<div class="form-group">
+									<button class="btn btn-success form-control shadow-none">Sign Up</button>
+								</div>
+							  </form><br>
+		
+							  <h3 style="display: none;" class="text text-center" style="font-size: 20px;">OR</h3>
+		
+								<div style="display: none;" class="text text-center">
+										Sign Up with your social media<br><br>
+										<button class="loginBtn loginBtn--facebook">
+										   Sign Up with Facebook
+										 </button>
+										 
+										 <button class="loginBtn loginBtn--google">
+										   Sign Up  with Google
+										 </button>
+								</div>
+						</div>
+						<div style="display: none;" id="vcodeDiv">
+							<form onsubmit="verifyCode(event)"method="POST" autocomplete="off">
+								<small style="display: none;" id="emailNotVerified" class="text text-info" >You have not verified your email, please input your verification code</small>
+								<div class="form-group">
+									<small id="invalidCode" style="display: none;" class="text text-danger">Invalid Code</small>
+									<label for="code">Verification code:</label>
+								 <input class="form-control shadow-none"  placeholder="Verification code" type="number" id="vcode" required>
+								</div>
+								<div class="form-group">
+									<button class="btn btn-success form-control shadow-none">Verify Me</button>
+									<br><br><button onclick="resendGet()" class="btn btn-info form-control shadow-none">Resend Code!</button>
+								</div>
+							</form>
+						</div>
+						<div style="display: none;" id="resendDiv">
+							<form onsubmit="resendCode(event)" method="POST" autocomplete="off">
+								<div class="form-group">
+									<label for="code">Email:</label>
+								 <input class="form-control shadow-none"  placeholder="email" type="email" id="resendEmail" required>
+								</div>
+								<div class="form-group">
+									<button  class="btn btn-success form-control shadow-none">Send</button>
+								</div>
+							</form>
+						</div>
+						
+					</div>
+				  </div>
+				</div>
+			  </div>
+		</div>
+	<script>
+		document.getElementById("telegram").onclick = function(event) {
+           telegram_share(the_music_url,the_music_name,the_music_category)
+        }
+        
+        document.getElementById("twitter").onclick = function(event) {
+           twitter_share(the_music_url,the_music_name,the_music_category)
+        }
+        
+        document.getElementById("facebook").onclick = function(event) {
+           facebook_share(the_music_url,the_music_name,the_music_category)
+        }
+        
+         document.getElementById("whatsapp").onclick = function(event) {
+           whatsapp_share(the_music_url,the_music_name,the_music_category)
+        }
+		   function sharer(music_url,music_name,music_category) {
+		       
+		       the_music_url = music_url
+		       the_music_name = music_name
+		       the_music_category = music_category
+		       getUrl(the_music_url)
+		       	$(document).ready(function(){
+				$("#shareModal").modal('show');
+			});
+		   }
+			function ifNotLogin(){
+			$(document).ready(function(){
+				$("#loginModal").modal('show');
+			});
+           }
+
+		   function showRegister() {
+			$(document).ready(function(){
+				$("#loginModal").modal('hide');
+			});
+
+			$(document).ready(function(){
+				$("#registerModal").modal('show');
+			});
+		   }
+		</script>
+		<!-- libs-->
+				<script src="/js/sharer.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/libs.min.js"></script>
+		<!-- scripts-->
+		<script src="js/common.min.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+
+</html>
