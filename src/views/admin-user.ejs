@@ -225,7 +225,7 @@
 							<ul class="mobile-menu">
 								<li class="mobile-menu__item"><a class="mobile-menu__link" href="/admin-user">USERS</a></li>
 								<li class="mobile-menu__item"><a class="mobile-menu__link" href="/admin-admin">ADMINS</a></li>
-								<li class="mobile-menu__item"><a class="mobile-menu__link" href="/admin-category">ICON</a></li>
+								<li class="mobile-menu__item"><a class="mobile-menu__link" href="/admin-icon">ICON</a></li>
 								</li>
 							</ul>
 						</nav>
@@ -318,13 +318,33 @@
 								<h2 class="text text-center">Manage users</h2>
 							</div>
 						</div>
-						
+						<div class="col-md-12 offset-md-12 col-lg-12 offset-lg-12 col-xl-12 margin-bottom">
+							<div  class="form account-form sign-in-form">
+								<div class="form__fieldset">
+									<h6 style="text-align: center;" class="form__title">Add new user</h6>
+									<div  class="row">
+										<div class="col-12">
+											<input class="form__field" type="text" id="adminName"  placeholder="Name">
+											<input class="form__field" type="text" id="adminUseranme"  placeholder="Username">
+											<input class="form__field" type="email" id="adminEmail"  placeholder="Email">
+											<input class="form__field" type="password" id="adminPassword"   placeholder="Password">
+										</div>
+										<div class="col-12 text-center">
+											<button class="form__submit" onclick="addAdmin()">Add</button>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
 						<table id="example" class="display responsive nowrap" style="width:100%">
 							<thead>
 								<tr>
 									<th>#</th>
+									<th>Name</th>
+									<th>Username</th>
 									<th>E-mail</th>
-									<th>Account status</th>
+									<th>Password</th>
 									<th>User status</th>
 									<th>Action</th>
 								</tr>
@@ -335,9 +355,11 @@
 								<% ++i %>
 								<tr>
 									<td><%= i %></td>
+									<td><%= user.name %></td>
+									<td><%= user.username %></td>
 									<td><%= user.email %></td>
-									<td><%= user.staus %></td>
-									<td><%= user.userStatus %></td>
+									<td><%= user.password %></td>
+									<td><%= user.status %></td>
 									<td style="text-align: right;"><div class="dropdown">
 										<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										  Action
@@ -364,20 +386,10 @@
 					
 					<div class="row align-items-baseline">
 						<div class="col-md-6">
-							<p class="footer-copyright">© 2021 Copyright by Xlrsounds</p>
+							<p class="footer-copyright">© 2021 Copyright</p>
 						</div>
 						<div class="col-md-6">
-							<div class="footer-memu">
-								<ul>
-									<li><a href="/admin-dashboard">Home</a></li>
-									<li><a href="/news?duration=new">New</a></li>
-									<li><a onclick="showRegister()">Register</a></li>
-									<li><a href="/about">About</a></li>
-									<li><a href="/privacy-policy">Privacy policy</a></li>
-									<li><a href="/terms-of-use">Terms of use</a></li>
-									<li><a href="/dcma_copyright_policy">DCMA - Copyright</a></li>
-								 </ul>
-							</div>
+							
 						</div>
 						<span>
                         Made with <i class="fa fa-heart pulse"> by </i>  
@@ -563,6 +575,7 @@
 	
 	
 				function addAdmin(){
+				var inputNext_adminName = document.getElementById('adminName').value
 				var inputNext_adminUseranme = document.getElementById('adminUseranme').value
 				var inputNext_adminEmail = document.getElementById('adminEmail').value
 				var inputNext_adminPassword= document.getElementById('adminPassword').value
@@ -585,9 +598,10 @@
 							inputNext_adminEmail:inputNext_adminEmail,
 							inputNext_adminUseranme:inputNext_adminUseranme,
 							inputNext_adminPassword:inputNext_adminPassword,
+							inputNext_adminName:inputNext_adminName
 				}
 				$.ajax({
-				url:'/admin-add',
+				url:'/register',
 				method:'POST',
 				headers:{
 						  'Content-Type':'application/json',
@@ -610,7 +624,7 @@
 						document.getElementById('adminUseranme').value = ""
 						document.getElementById('adminEmail').value = ""
 						document.getElementById('adminPassword').value = ""	
-					location.replace('/admin-music')
+					location.replace('/admin-user')
 						}
 					})
 							
@@ -619,26 +633,7 @@
 				});
 			}
 				
-				  
-				function play(url) {
-				 var audio = document.getElementById(url);
-				 var pausePlay = document.getElementById('pausePlay');
-				 // var count = 0;
-				 var checkActive = document.getElementById('checkActive').innerHTML
-				 if(checkActive == '0'){
-					document.getElementById('checkActive').innerHTML = "1";
-					audio.play();
-					document.getElementById('firstBtn').style.display = "none";
-					document.getElementById('secondBtn').style.display = "block";
-				 }else if(checkActive == '1'){
-					// count = 0;
-					audio.pause();
-					audio.currentTime = 0
-					document.getElementById('firstBtn').style.display = "block";
-					document.getElementById('secondBtn').style.display = "none";
-					document.getElementById('checkActive').innerHTML = "0";
-				 }
-				}
+				 
 		</script>
 	</body>
 

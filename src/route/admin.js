@@ -3,17 +3,9 @@ const Router = express.Router()
 const con = require('../db/db')
 const auth  = require('../middleware/admin-auth')
 
-Router.get('/admin', async (req, res) =>{
-    try{
-        var category_status = "activated"
-        var sql3 = "SELECT * FROM category WHERE category_status='" + category_status + "'";
-         await con.query(sql3, async function (err, categoryResult){
-           if(err){
-              console.log(err)
-              return
-          }   
-        res.render('admin-login',{categories:categoryResult,email:null})
-         })
+Router.get('/admin', auth, async (req, res) =>{
+    try{  
+        res.render('admin-login',{email:null})
     }catch(e){
         res.render('500')
     }
@@ -22,15 +14,7 @@ Router.get('/admin', async (req, res) =>{
 
 Router.get('/admin-login', async (req, res) =>{
     try{
-        var category_status = "activated"
-        var sql3 = "SELECT * FROM category WHERE category_status='" + category_status + "'";
-         await con.query(sql3, async function (err, categoryResult){
-           if(err){
-              console.log(err)
-              return
-          }   
-        res.render('admin-login',{categories:categoryResult,email:null})
-         })
+        res.render('admin-login',{email:null})
     }catch(e){  
         res.render('500')
     }
@@ -41,27 +25,27 @@ Router.post('/admin-login', async (req, res) =>{
     const password = req.body.adminpassword
     // console.log(req.body)
     try {
-       var sql3 = "SELECT * FROM admin WHERE email = "+ con.escape(req.body.adminUnameEmail) +" OR username = "+ con.escape(req.body.adminUnameEmail) +" AND password = "+ con.escape(req.body.adminpassword) +"";
+       var sql3 = "SELECT * FROM admin WHERE emai = "+ con.escape(req.body.adminUnameEmail) +" OR username = "+ con.escape(req.body.adminUnameEmail) +" AND pass = "+ con.escape(req.body.adminpassword) +"";
         con.query(sql3, async function (err, theAdminResult, fields){
           if(err){
              console.log(err)
              return
          }
-
+        //  console.log(theAdminResult)
          if(theAdminResult.length < 1){
           return res.status(201).send({error:"doesnotexist"})
          }
-         if(theAdminResult[0].password == password){
+         if(theAdminResult[0].pass == password){
         //   req.session.regname = memberResult[0].sname + " " + memberResult[0].fname;
         //   req.session.level = "updated"
-          if(theAdminResult[0].adminStatus == "suspended"){
+          if(theAdminResult[0].status == "suspended"){
             return res.status(201).send({error:"suspended"})
           }
-          if(theAdminResult[0].adminStatus == "activated"){
+          if(theAdminResult[0].status == "activated"){
             req.session.adminLoggedin = true;
-            req.session.adminAppId = theAdminResult[0].user_id;
+            req.session.adminAppId = theAdminResult[0].id;
             req.session.adminUsername = theAdminResult[0].username;
-            req.session.adminEmail =  theAdminResult[0].email;
+            req.session.adminEmail =  theAdminResult[0].emai;
             return res.status(201).send({success:"activated"})
           }
           
@@ -75,14 +59,14 @@ Router.post('/admin-login', async (req, res) =>{
     }
 })
 
-Router.get('/admin-logout', async(req,res) =>{
+Router.get('/admin-logout',  auth, async(req,res) =>{
     req.session.adminLoggedin = false;
     req.session.adminAppId = null;
     req.session.adminUsername = null
     res.redirect('/admin-login')
  });
 
-Router.get('/admin-dashboard', async (req, res) =>{
+Router.get('/admin-dashboard', auth, async (req, res) =>{
     try {
         var sql3 = "SELECT * FROM icon";
          await con.query(sql3, async function (err, allIconResult){
@@ -114,7 +98,7 @@ Router.get('/admin-dashboard', async (req, res) =>{
          }
 })
 
-Router.get('/admin-user', async (req, res) =>{
+Router.get('/admin-user', auth, async (req, res) =>{
     try {
         var sql3 = "SELECT * FROM users";
          await con.query(sql3, async function (err, usersResult){
@@ -129,7 +113,7 @@ Router.get('/admin-user', async (req, res) =>{
          }
 })
 
-Router.get('/admin-icon', async (req, res) =>{
+Router.get('/admin-icon', auth, async (req, res) =>{
        try {     
         var sql3 = "SELECT * FROM icon";
          await con.query(sql3, async function (err, musicResult){
@@ -144,23 +128,8 @@ Router.get('/admin-icon', async (req, res) =>{
          }
 })
 
-Router.get('/admin-category', auth,async (req, res) =>{
-    try {
-        var sql3 = "SELECT * FROM category";
-         await con.query(sql3, async function (err, categoryResult){
-           if(err){
-              console.log(err)
-              return
-          }
-          res.render('admin-category', {category:categoryResult})
-         })
-         } catch(e) {
-             res.render('500')
-         }
-})
 
-
-Router.get('/admin-edit-sound/:id', async (req, res) =>{
+Router.get('/admin-edit-sound/:id', auth, async (req, res) =>{
     try {  
     const email = req.body.email
     const music_status = "activated"
@@ -190,7 +159,7 @@ Router.get('/admin-edit-sound/:id', async (req, res) =>{
          }
 })
 
-Router.post('/admin-update-sound',  async (req,res) =>{
+Router.post('/admin-update-sound',  auth,  async (req,res) =>{
    const id = req.body.iconId
 //    console.log(id)
    var sql3 = "SELECT * FROM icon WHERE id = '"+ id +"'";
@@ -217,43 +186,7 @@ Router.post('/admin-update-sound',  async (req,res) =>{
     })
  })
 
-Router.post('/admin-add-category', auth, async (req, res) =>{
-    let ts = Date.now();
-    let date_ob = new Date(ts);
-    let date = date_ob.getDate();
-    let month = date_ob.getMonth() + 1;
-    let year = date_ob.getFullYear();
-    var date_created = year + "-" + month + "-" + date
-   try{
-    var sql3 = "SELECT category FROM category wHERE category = "+ con.escape(req.body.category) +"";
-    con.query(sql3, async function (err, existResult){
-      if(err){
-         console.log(err)
-         return
-     }
-     //console.log(result)
-     if( existResult.length  > 0){
-      return res.status(200).send({error:"exist"})
-      
-     }
-
-     const categoryId = Math.floor(Math.random() * (999999 - 100000 + 1)) +100000;
-     const categoryId_status = "activated"
-     var sql1 = "INSERT INTO category (category_id,category,category_status,date_time) VALUES ('"+ categoryId +"'," +con.escape(req.body.category) +"," +con.escape(categoryId_status) +",'" + date +"')"
-     result = con.query(sql1)
-     if(result){
-          res.status(201).send({success:"saved"})
-     }
-
-
-    })
-   } catch(e) {
-
-   }
-})
-
-
-Router.get('/admin-admin', async (req, res) =>{
+Router.get('/admin-admin',  auth,async (req, res) =>{
     try {  
         var sql3 = "SELECT * FROM admin";
             await con.query(sql3, async function (err, adminResult){
@@ -268,7 +201,7 @@ Router.get('/admin-admin', async (req, res) =>{
     }
 })
 
-Router.post('/admin-add',async (req, res) =>{
+Router.post('/admin-add', auth, async (req, res) =>{
     let ts = Date.now();
     let date_ob = new Date(ts);
     let date = date_ob.getDate();
@@ -304,7 +237,7 @@ Router.post('/admin-add',async (req, res) =>{
    }
 })
 
-Router.post('/admin-action', async (req, res) =>{
+Router.post('/admin-action', auth, async (req, res) =>{
     mangeSqlTable = req.body.manageTable
 
     try {
@@ -326,7 +259,7 @@ Router.post('/admin-action', async (req, res) =>{
         }
 
         if(mangeSqlTable === "user"){
-            var sql2 = "UPDATE users SET userStatus = "+ con.escape(req.body.manageAction) +" WHERE id = " +  con.escape(req.body.manage_id) + ""
+            var sql2 = "UPDATE users SET status = "+ con.escape(req.body.manageAction) +" WHERE id = " +  con.escape(req.body.manage_id) + ""
             con.query(sql2, async function (err, action) {
                 if(err){
                   console.log(err);

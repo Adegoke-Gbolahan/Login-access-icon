@@ -41,9 +41,8 @@ Router.post('/register', async (req, res) =>{
            return res.status(200).send({error:"exist"})
            
           }
-        var verifyStatus = "Unverified"
-        const verifyCode = Math.floor(Math.random() * (999999 - 100000 + 1)) +100000;
-           var sql1 = "INSERT INTO users (email,password,staus,verifyCode,date_created) VALUES (" +con.escape(req.body.email) +"," +con.escape(req.body.pwd) +",'"+verifyStatus+"','"+ verifyCode +"','"+date_created+"')"
+        var verifyStatus = "activated"
+           var sql1 = "INSERT INTO users (email,name,username,password,status,date_created) VALUES (" +con.escape(req.body.inputNext_adminEmail) +"," +con.escape(req.body.inputNext_adminName) +"," +con.escape(req.body.inputNext_adminUseranme) +"," +con.escape(req.body.inputNext_adminPassword) +",'"+verifyStatus+"','"+date_created+"')"
            con.query(sql1, async function (err, result){
             if(err){
                console.log(err)
@@ -51,7 +50,6 @@ Router.post('/register', async (req, res) =>{
            }
         //    console.log(result)
            if(result.affectedRows > 0){
-               sendVerifyMail(req.body.email,verifyCode)
                 req.session.email = req.body.email
                 res.status(201).send({success:"saved"})
            }

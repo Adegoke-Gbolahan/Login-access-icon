@@ -2,42 +2,29 @@
 <html lang="en">
 
 <head>
-       <meta name="google-site-verification" content="LV2MOtBd1lGUll9e_A32nAV0oCGHkvLUbIU7bVai9cM" />
 		<meta charset="UTF-8"/>
 		<meta name="description" content="description"/>
 		<meta name="keywords" content="keywords"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-		<title>XLR Sounds | The largest sound buttons website!</title>
-    	<meta name="description" content="Xlr sounds is a platform where you find funny sound buttons HAVE FUN!" />
-    	<meta property="og:title" content="Xlr sounds - Funny Sounds platform" />
-    	<meta property="og:description" content="Click here to play the sounds" />
-    	<meta property="og:type" content="website" />
-    	<meta property="og:url" content="https://www.xlrsounds.com/home" />
-    	<meta property="og:image" content="https://xlrsounds.com/img/logo_mono.png" />
-    	<meta property="og:image:width" content="1200" />
-    	<meta property="og:image:height" content="1200" />
-    	<meta property="og:image" content="https://xlrsounds.com/img/logo_mono.png" />
-    	<meta property="og:image:width" content="400" />
-    	<meta property="og:image:height" content="400" />
-    	<meta property="og:site_name" content="xlrsounds" />
-    	<meta name="twitter:card" content="summary_large_image" />
-    	<meta name="twitter:site" content="@xlrsounds" />
-    	<meta name="twitter:title" content="xlrsounds - Funny Sounds platform" />
-    	<meta name="twitter:description" content="Click here to play the sounds" />
-    	<meta name="twitter:image" content="https://xlrsounds.com/img/logo_mono.png" />
-    	<meta name="keywords" content="soundboard, xlrsounds, xlr sounds, sounds, xlr, sound xlr,XLRSOUNDS, xlr buttons xlr button,instant button, instant buttons, funny sounds, funny gifs, internet memes, viral sounds, instantsfun, xlrsounds.com, xlr sounds platform, xlr sound platform ,xlrsounds platform, xlr sounds platform, platform ,xlrsounds, xlrsounds facebook,  xlrsounds instagram,  xlrsounds twiiter,  xlrsounds telegram" />
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<meta name="author" content="Binarytechsolution">
-    	<meta name="apple-mobile-web-app-capable" content="yes">
-    	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-    	<meta name="apple-mobile-web-app-title" content="Xlrsounds">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-		<meta name="wb:op" content="c02dbf68a39173c4fb095aee68dda40f"/>
 		<link rel="shortcut icon" href="img/favicon.jpg"/>
-		
+		<title>Login Access</title>
 		<!-- styles-->
 		<link rel="stylesheet" href="css/styles.min.css"/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css"/>
+		
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css"/>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<!-- web-font loader-->
 		<script>
 			WebFontConfig = {
@@ -67,6 +54,69 @@
 			font()
 		</script>
 		<style>
+/* CARD */
+.card-counter{
+    box-shadow: 2px 2px 10px #DADADA;
+    margin: 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 100px;
+    border-radius: 5px;
+    transition: .3s linear all;
+  }
+
+  .card-counter:hover{
+    box-shadow: 4px 4px 20px #DADADA;
+    transition: .3s linear all;
+  }
+
+  .card-counter.primary{
+    background-color: #007bff;
+    color: #FFF;
+  }
+
+  .card-counter.danger{
+    background-color: #ef5350;
+    color: #FFF;
+  }  
+
+  .card-counter.success{
+    background-color: #66bb6a;
+    color: #FFF;
+  }  
+
+  .card-counter.info{
+    background-color: #26c6da;
+    color: #FFF;
+  }  
+
+  .card-counter i{
+    font-size: 5em;
+    opacity: 0.2;
+  }
+
+  .card-counter .count-numbers{
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+  }
+
+  .card-counter .count-name{
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    font-style: italic;
+    text-transform: capitalize;
+    opacity: 0.5;
+    display: block;
+    font-size: 18px;
+  }
+
+
+
+
 			@media screen and (min-width: 600px){
 				.aside-dropdown{
 					display: none;
@@ -163,115 +213,15 @@
   .loginBtn--google:focus {
     background: #E74B37;
   }
-
-.modal-title {
-    font-weight: 900
-}
-
-.modal-content {
-    border-radius: 13px
-}
-.fab:before {
-    position: relative;
-    top: 13px
-}
-
-.smd {
-    width: 200px;
-    font-size: small;
-    text-align: center
-}
-
-.modal-footer {
-    display: block
-}
-
-.ur {
-    border: none;
-    background-color: #e6e2e2;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px
-}
-
-.cpy {
-    border: none;
-    background-color: #e6e2e2;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-    cursor: pointer
-}
-
-button.focus,
-button:focus {
-    outline: 0;
-    box-shadow: none !important
-}
-
-.ur.focus,
-.ur:focus {
-    outline: 0;
-    box-shadow: none !important
-}
-
-.message {
-    font-size: 11px;
-    color: #ee5535
-}
-
-@media only screen and (min-width: 600px) {
-  .space-div{
-      position: relative;
-    vertical-align: top;
-    width: 84px;
-    text-align: center;
-    display: inline-block;
-    margin-bottom: 30px;
-    margin-right: 25px;
-    margin-left: 25px;
-    word-wrap: break-word;
-}
-}
-/*-20px -50px*	margin: 3em;
-	padding: 20px;/
 		</style>
-		
-		<script src="js/jquery.min.js"></script>
-		<script>
-// 				var requestUrl = "http://ip-api.com/json";
-// 				$.get("http://ip-api.com/json", function(response) {
-// 				console.log(response.country);
-// 				document.getElementById('countryName').innerHTML = response.country
-// 			}, "jsonp");
-					function getUrl(getMusicIid){
-					document.getElementById('myInput').value = "https://xlrsounds.com/music/" + getMusicIid;
-				}
-				function copyToClipboard(){
-				  var copyText = document.getElementById("myInput");
-                  copyText.select();
-                  copyText.setSelectionRange(0, 99999)
-                  document.execCommand("copy");	
-                  document.getElementById('copiedMsg').innerHTML = "copied"
-                 setTimeout(function(){
-                 document.getElementById('copiedMsg').innerHTML = ""
-                }, 2000);//wait 2 
-				}
-		</script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	</head>
-	<body onload="getUrl()">
+	<body>
 		<div class="page-wrapper">
-			<!-- mobile menu start-->
+					<!-- mobile menu start-->
 			<div class="mobile-nav">
 				<div class="mobile-nav__inner">
 					<div class="mobile-nav__item">
-						<nav class="menu-holder">
-							<ul class="mobile-menu">
-								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
-								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
-								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
-								<li class="mobile-menu__item"><a class="mobile-menu__link" href="#">item</a></li>
-							</ul>
-						</nav>
+						
 					</div>
 				</div>
 			</div>
@@ -283,31 +233,7 @@ button:focus {
 						<use xlink:href="#close"></use>
 					</svg></span>
 					<div class="aside-dropdown__item d-lg-none d-block">
-						<ul class="aside-menu">
-							<li class="aside-menu__item aside-menu__item--has-child aside-menu__item--active"><a class="aside-menu__link" href="/"><span>HOME</span></a>
-							</li>
-							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="javascript:void(0);"><span>TRENDING</span></a>
-							</li>
-							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="/news?duration=new"><span>NEW</span></a>
-							</li>
-							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="javascript:void(0);"><span>CATEGORYS</span></a>
-								<ul class="aside-menu__sub-list">
-											<%  for (let i = 0; i < categories.length; i++) {  %> 
-												<li><a href="/category?category=<%= categories[i].category %>"><span><%= categories[i].category %></span></a></li>
-												<% } %>
-								</ul>
-							</li>
-							<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="/favourite?favourite=1"><span>FAVORITES</span></a>
-							</li>
-							<%if(email == null){%>
-								<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" onclick="ifNotLogin()"><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>
-								</li>
-								<% }else{ %>		
-								<li class="aside-menu__item aside-menu__item--has-child"><a class="aside-menu__link" href="/user-upload"><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>
-								</li>
-						    <% } %>	
-							
-						</ul>
+						
 					</div>
 					
 				</div>
@@ -321,55 +247,25 @@ button:focus {
 							<div class="dropdown-trigger d-none d-sm-block">
 								<div class="dropdown-trigger__item"></div>
 							</div>
-							<div class="header-logo"><a class="header-logo__link" href="/"><img class="header-logo__img" src="img/logo_mono.png" alt="logo"/></a></div>
+							<div class="header-logo"><a class="header-logo__link" href="/admin-dashboard"><img class="header-logo__img" src="img/logo_mono.png" alt="logo"/></a></div>
 						</div>
 						<div class="col-auto">
 							<!-- main menu start-->
-							<nav>
-								<ul class="main-menu">
-									<li class="main-menu__item main-menu__item--has-child main-menu__item--active"><a class="main-menu__link" href="/"><span>HOME</span></a>
-									</li>
-									</li>
-									<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="/news?duration=new"><span>NEW</span></a>
-									</li>
-									<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>CATEGORYS</span></a>
-										<ul class="main-menu__sub-list">
-											<%  for (let i = 0; i < categories.length; i++) {  %> 
-												<li><a href="/category?category=<%= categories[i].category %>"><span><%= categories[i].category %></span></a></li>
-												<% } %>
-										</ul>
-									</li>
-									<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="/favourite?favourite=1"><span>FAVORITES</span></a>
-									</li>
-									<%if(email == null){%>
-									<li class="main-menu__item main-menu__item--has-child"><a  onclick="ifNotLogin()" class="main-menu__link"><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>
-									<% }else{ %>	
-									<li class="main-menu__item main-menu__item--has-child"><a  href="/user-upload" class="main-menu__link" ><span><i class="fa fa-upload" aria-hidden="true"></i></span></a>	
-									</li>
-									<% } %>
-								</ul>
-							</nav>
+							
 							<!-- main menu end-->
 						</div>
 						<div class="col-auto d-flex align-items-center">
 							<!-- REGISTER BTN start-->
-							<li class="lang-select__item lang-select__item--active"  style="margin-right: 40px;"><span><i style="font-size: 30px;" class="fa fa-user" aria-hidden="true"></i></span>
-								<%if(email == null){%>
-								<ul class="lang-select__sub-list" style="width:200px;">
-									<li><a style="text-decoration: none;color: black;" onMouseOver="this.style.color='black'"
-										onMouseOut="this.style.color='black'" data-toggle="modal" data-target="#loginModal" >Login</a>
-									</li>
-										<li><a style="text-decoration: none;color: black;" onMouseOver="this.style.color='black'"
-											onMouseOut="this.style.color='black'" data-toggle="modal" data-target="#registerModal" >Sign Up</a>
-										</li>
-								</ul>
-								<%}else{%>
-									<ul class="lang-select__sub-list" style="width:200px;">
-										<li><a href="/user-dashboard">Favorites</a></li>
-										<li><a href="/logout">Sign Out</a></li>
-									</ul>
-								<%}%>
-							</li>
+                                <!-- <ul class="aside-menu">
+                                    <li class="aside-menu__item"><a class="aside-menu__link" href="#">View Profile</a></li>
+                                    <li class="aside-menu__item"><a class="aside-menu__link" href="#">Sign Out</a></li>
+                                </ul> -->
+
+                                    <li class="lang-select__item lang-select__item--active" style="margin-right: 40px;"><span><i style="font-size: 30px;" class="fa fa-user" aria-hidden="true"></i></span>
+                                        <ul class="lang-select__sub-list" style="width:200px;">
+                                            <li><a href="/logout">Sign Out</a></li>
+                                        </ul>
+                                    </li>
 							<!-- REGISTER BTN end-->
 							<div class="dropdown-trigger d-block d-sm-none">
 								<div class="dropdown-trigger__item"></div>
@@ -387,47 +283,10 @@ button:focus {
 				<!-- section start-->
 				<section class="section">
 					<div class="container" style="align-items: center;">
-						<div class="row d-flex justify-content-center text-center margin-bottom">
-							<div class="col-12">
-								<h2 class="text text-center"><%=title%>  <%if(home == "1"){%> <span id="countryName"></span><%}%> </h2>
-								<%if(email == null || email == undefined || email == ""){%>
-									<marquee behavior="" direction="right"><small class="text text-warning">You are not logged in</small></marquee>
-								<%}%>
-								<br><br><br>
-							</div>
-							<br><br>
-							<%if(music.length >0){
-								for( var i = 0; i<music.length; i++){	
-							%>
-							    <div class="space-div">
-								<audio id="<%=music[i].music_id%>">
-									<source src="music/<%=music[i].url%>" type="audio/mpeg">
-								 </audio>
-									<button  class="btn btn-outline shadow-none" id="pausePlay"    onmousedown="play('music/<%=music[i].url%>','<%=music[i].music_id%> + <%=music[i].url%>','<%=music[i].music_id%> + <%=music[i].id%>','<%=music[i].music_id%>')">
-									<img id="<%=music[i].music_id%> + <%=music[i].url%>" style="width: 70px;display: block;" src="img/btn1.png" alt="Image">
-									<img id="<%=music[i].music_id%> + <%=music[i].id%>"  style="width: 70px;display:none;" src="img/btn2.png" alt="Image">
-									<small style="display:none;" id="checkActive" >0</small>
-									</button><br>
-									<a href="/music/<%=music[i].music_id%>" style="text-decoration: none;color: black;font-size:80%" onMouseOver="this.style.color='#6b96f5'"
-									 onMouseOut="this.style.color='black'"><%=music[i].name%></a>
-									<div>
-										<i onclick="myfav('<%=music[i].music_id%>','<%=music[i].url%>','<%=music[i].id%>','<%=music[i].name%>','<%=music[i].category%>')" style="color: red;" class="fa fa-heart" aria-hidden="true"></i> &nbsp; 
-										<i onclick="sharer('<%=music[i].music_id%>','<%=music[i].name%>','<%=music[i].category%>')" class="fa fa-share-alt"  style="color: #14ed38;"  aria-hidden="true"></i>
-									</div>
-			
-							</div>
-							<%}}else{%>
-								<h3 class="text text-center" >No sound in this category!. Please check back later</h3>
-							<%}%>
-						 </div>
-						<div class="row offset-margin align-items-baseline" style="align-items: center;">
-							
-						</div> 
-					<br><br><br>
 					<div class="container">
 						<div class="row margin-bottom">
 							<div class="col-12">
-								<h2 class="text text-center">XLR SOUND </h2>
+								<h2 class="text text-center">My Links </h2>
 							</div>
 						</div>
 						<div class="row d-flex justify-content-center text-center" style="align-items: center;">
@@ -439,16 +298,13 @@ button:focus {
 								<audio id="<%=all[i].all%>">
 									<source src="music/<%=all[i].url%>" type="audio/mpeg">
 								 </audio>
-									<button class="btn btn-outline shadow-none" id="pausePlay"  onclick="play('music/<%=all[i].url%>','a<%=all[i].music_id%> + <%=all[i].url%>','a<%=all[i].music_id%> + <%=all[i].id%>','<%=all[i].music_id%>')">
-									<img id="a<%=all[i].music_id%> + <%=all[i].url%>" style="width: 70px;" src="img/btn1.png" alt="Image">
-									<img id="a<%=all[i].music_id%> + <%=all[i].id%>"  style="width: 70px;display:none;" src="img/btn2.png" alt="Image">
-									<small style="display: none;" id="checkActive" >0</small>
-									</button><br>
+									<a class="btn btn-outline shadow-none" target="_blank" href="<%=all[i].link%>" id="pausePlay">
+									<img id="<%=all[i].id%>" style="width: 70px;" src="/icon/<%=all[i].image_url%>" alt="Image">
+									</a><br>
 									<a href="/music/<%=all[i].music_id%>" style="text-decoration: none;color: black;font-size:80%" onMouseOver="this.style.color='#6b96f5'"
 									 onMouseOut="this.style.color='black'"><%=all[i].name%></a>
 									<div>
-										<i onclick="myfav('<%=all[i].music_id%>','<%=all[i].url%>','<%=all[i].id%>','<%=all[i].name%>','<%=all[i].category%>')" style="color: red;" class="fa fa-heart" aria-hidden="true"></i> &nbsp; 
-											<i onclick="sharer('<%=all[i].music_id%>','<%=all[i].name%>','<%=all[i].category%>')" class="fa fa-share-alt"  style="color: #14ed38;"  aria-hidden="true"></i>
+										<a target="_blank" href="<%=all[i].link%>"><small><%=all[i].title%></small></a>
 									</div>	
 							</div>
 							<%}}else{%>
@@ -499,20 +355,10 @@ button:focus {
 					
 					<div class="row align-items-baseline">
 						<div class="col-md-6">
-							<p class="footer-copyright">© 2021 Copyright by Xlrsounds</p>
+							<p class="footer-copyright">© 2021 Copyright</p>
 						</div>
 						<div class="col-md-6">
-							<div class="footer-memu">
-								<ul>
-									<li><a href="/">Home</a></li>
-									<li><a href="/news?duration=new">New</a></li>
-									<li><a onclick="showRegister()">Register</a></li>
-									<li><a href="/about">About</a></li>
-									<li><a href="/privacy-policy">Privacy policy</a></li>
-									<li><a href="/terms-of-use">Terms of use</a></li>
-									<li><a href="/dcma_copyright_policy">DCMA - Copyright</a></li>
-								 </ul>
-							</div>
+							
 						</div>
 						<span>
                         Made with <i class="fa fa-heart pulse"> by </i>  
